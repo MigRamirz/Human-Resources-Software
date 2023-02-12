@@ -16,7 +16,7 @@ finally program is:
 - Has Class Diagram
 - JavaDoc
 
-If you have any nonconformity or doubt, just comment me, sorry if I merge code in the main brench. I hope HRS gets nice for you ;D
+If you have any nonconformity or doubt, just comment me, sorry if I merge code in the main branch. I hope HRS gets nice for you ;D
 
 Miguel Ramírez
 
