@@ -7,9 +7,7 @@ https://lucid.app/lucidchart/b1916e3d-5d26-4abc-90a1-d8741bbdc328/edit?viewport_
 
 ## Code detalis:
 
-Human Resources Software (HRS) allows list, delete, and set a new contestant if there is a least one contestant and if the ID exists in the file serializable, also allows add new contestant if the ID doesn't exists in the same, so manage the possiblee exceptions and save the data well. In conclusion works correctly. 
-
-But it should be clarified that when a contestant is removed for program, gets be deleted for file serializable, but not for "ArrayList" or this is what I think, the case is when I delete a constestant, close the program and open it again, the contestant deleted still there in the GUI but not in the file serializable.
+Human Resources Software (HRS) allows list, delete, and set a new contestant if there is a least one contestant and if the ID exists in the file serializable, also allows add new contestant if the ID doesn't exists in the same, so manage the possiblee exceptions and save the data well. In conclusion works correctly.
 
 finally program is:
 - Commented
