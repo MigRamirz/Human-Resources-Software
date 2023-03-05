@@ -64,7 +64,6 @@ public class Controller implements ActionListener{
 	/**
 	 * Attribute declaration for manage files
 	 */
-	
 	/**
 	 * Constructor method which allows start some attributes for a correct running
 	 */
@@ -80,6 +79,7 @@ public class Controller implements ActionListener{
 		optf3_3 = new OptFrame3_3();
 		cdao = new ContestantDAOImplements();
 		f.setVisible(false);
+		run();
 		
 		f.p1.getListb().addActionListener(this);
 		f.p1.getAddb().addActionListener(this);
@@ -110,7 +110,6 @@ public class Controller implements ActionListener{
 		f.p3_2.getSaveb().addActionListener(this);
 		f.p3_2.getBackb().addActionListener(this);
 		
-		run();
 	}
 	
 	/**
@@ -199,7 +198,7 @@ public class Controller implements ActionListener{
 						f.p3.getTage().setText("");
 						f.p3.getTid().setText("");
 						f.p3.getTpost().setText("");
-					}	
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Invalid characters \n"
 							+ "No special characteres");
@@ -216,15 +215,16 @@ public class Controller implements ActionListener{
 		if(e.getActionCommand().equals("Set")) {
 			optf2_2.setVisible(true);
 		}
+		String ids = "";
 		if(e.getActionCommand().equals("Submit2")) {
 			if(optf2_2.getTid().getText().equals("")){
 				JOptionPane.showMessageDialog(null, "Field void");
 			}else {
 				if(optf2_2.getTid().getText().matches("[0-9]*")){
 					if(cdao.find(optf2_2.getTid().getText())==true) {
+						ids = optf2_2.getTid().getText();
 						f.p2.setVisible(false);
 						optf2_2.setVisible(false);
-						optf2_2.getTid().setText("");
 						f.p3_2.setVisible(true);
 					}else {
 						JOptionPane.showMessageDialog(null, "Contestant not found");
@@ -237,10 +237,12 @@ public class Controller implements ActionListener{
 			}
 			
 		}
+		
 		if(e.getActionCommand().equals("Save2")) {
-			String n,s,id,post, age;
+			String n,s,post, age;
+			ids = optf2_2.getTid().getText();
 			try {
-			id = optf2_2.getTid().getText();
+			
 			n = f.p3_2.getTname().getText();
 			s = f.p3_2.getTsurname().getText();
 			age = f.p3_2.getTage().getText();
@@ -256,7 +258,7 @@ public class Controller implements ActionListener{
 						(f.p3_2.getTsurname().getText().matches("[A-z]*")) &&
 						f.p3_2.getTage().getText().matches("[0-9]*")) {
 					int age2 = Integer.parseInt(age);
-					cdao.setContestant(id, n, s, age2, post);
+					cdao.setContestant(ids, n, s, age2, post);
 					optf3_2.setVisible(true);
 					f.p3_2.getTname().setText("");
 					f.p3_2.getTsurname().setText("");
@@ -277,13 +279,14 @@ public class Controller implements ActionListener{
 		if(e.getActionCommand().equals("Remove")) {
 			optf2_3.setVisible(true);
 		}
+		String idd = "";
 		if(e.getActionCommand().equals("Submit3")) {
+			idd = optf2_3.getTid().getText();
 			if(optf2_3.getTid().getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Field void");
 			}else {
 				if(optf2_3.getTid().getText().matches("[0-9]*")) {
 					if(cdao.find(optf2_3.getTid().getText())==true) {
-						optf2_3.getTid().setText("");
 						optf2_0.setVisible(true);
 					}else {
 						JOptionPane.showMessageDialog(null, "Contestant not found");
@@ -293,14 +296,20 @@ public class Controller implements ActionListener{
 					JOptionPane.showMessageDialog(null, "Invalid characters");
 					optf2_3.getTid().setText("");
 				}
-			}
+			} 
 		}
 		if(e.getActionCommand().equals("Yes2")) {
+			idd = optf2_3.getTid().getText();
 			optf2_0.setVisible(false);
 			optf2_3.setVisible(false);
 			optf3_3.setVisible(true);
-			cdao.deleteContestant(optf2_3.getTid().getText());
+			cdao.deleteContestant(idd);
 			f.p2.getListpane().setText(cdao.listContestant());
+			if(cdao.listContestant() == "") {
+				JOptionPane.showMessageDialog(null, "Now contestant list is void");
+				f.p2.setVisible(false);
+				f.p1.setVisible(true);
+			}
 		}
 		if(e.getActionCommand().equals("Ok3")) {
 			optf3_3.setVisible(false);

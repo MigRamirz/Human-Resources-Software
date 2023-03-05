@@ -3,6 +3,8 @@ package co.edu.unbosque.model;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.persistence.FileHandler;
+
+
 /**
  * 
  * @author MiguelRamírez
@@ -20,43 +22,20 @@ public class ContestantDAOImplements implements ContestantDAO{
 		list = new ArrayList<ContestantDTO>();
 		loadSerializable();
 	}
-	/**
-	 * method for write object attributes in memory
-	 */
-	public void writeFile() {
-		String content = listContestant();
-		FileHandler.writeFile("Data.csv", content);
-	}
-	/**
-	 * method for load object attributes in a serializable file
-	 */
+	
 	@SuppressWarnings("unchecked")
 	public void loadSerializable() {
-		Object aux = FileHandler.readSerializable("Dataserializable.31n");
+		Object aux = FileHandler.readSerializable("Data.mrx");
 		list = (ArrayList<ContestantDTO>)aux;
 	}
-	/**
-	 * method for load object attributes in program
-	 */
-	public void loadFile() {
-		String content = FileHandler.loadFile("Data.csv");
-		String[] lines = content.split("\n");
-		for (String s : lines) {
-			if(s.equals("")) 
-				continue;
-				String[] columns = s.split(",");
-				list.add(new ContestantDTO(columns[0], columns[1], 
-						Integer.parseInt(columns[2]), columns[3], columns[4]));
-		}
-	}
+	
 	/**
 	 * method which creates a new object contestant
 	 */
 	@Override
 	public void addNewContestant(String name,String surname,int age, String id, String post) {
-				list.add(new ContestantDTO(name, surname, age, id, post));
-				writeFile();
-				FileHandler.writeSerializable(list, "Dataserializable.31n");
+			list.add(new ContestantDTO(name, surname, age, id, post));
+			FileHandler.writeSerializable(list, "Data.mrx");
 	}
 	/**
 	 * method which sets an object contestant
@@ -69,9 +48,9 @@ public class ContestantDAOImplements implements ContestantDAO{
 				list.get(i).setSurname(surname);
 				list.get(i).setAge(age);
 				list.get(i).setPost(post);
-				writeFile();
 			}
 		}
+		FileHandler.writeSerializable(list, "Data.mrx");
 	}
 	/**
 	 * method which deletes an object contestant
@@ -81,9 +60,9 @@ public class ContestantDAOImplements implements ContestantDAO{
 		for (int i = 0; i < list.size(); i++) {
 			if(list.get(i).getId().equals(id)) {
 				list.remove(i);
-				writeFile();
 			}
 		}
+		FileHandler.writeSerializable(list, "Data.mrx");
 	}
 	/**
 	 * method which lists objects contestant
@@ -118,5 +97,9 @@ public class ContestantDAOImplements implements ContestantDAO{
 			}
 		}
 		return found;
+	}
+	
+	public ArrayList<ContestantDTO>list(){
+		return list;
 	}
 }

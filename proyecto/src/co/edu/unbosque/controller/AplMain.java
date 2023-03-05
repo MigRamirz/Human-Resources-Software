@@ -13,5 +13,7 @@ public class AplMain {
 	 */
 	public static void main(String[] args) {
 		Controller c = new Controller();
+		Server s = new Server(9000);
+		s.start();
 	}
 }
