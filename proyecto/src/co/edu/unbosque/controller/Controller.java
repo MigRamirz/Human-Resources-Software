@@ -64,7 +64,6 @@ public class Controller implements ActionListener{
 	/**
 	 * Attribute declaration for manage files
 	 */
-	
 	/**
 	 * Constructor method which allows start some attributes for a correct running
 	 */
@@ -80,6 +79,7 @@ public class Controller implements ActionListener{
 		optf3_3 = new OptFrame3_3();
 		cdao = new ContestantDAOImplements();
 		f.setVisible(false);
+		run();
 		
 		f.p1.getListb().addActionListener(this);
 		f.p1.getAddb().addActionListener(this);
@@ -110,7 +110,6 @@ public class Controller implements ActionListener{
 		f.p3_2.getSaveb().addActionListener(this);
 		f.p3_2.getBackb().addActionListener(this);
 		
-		run();
 	}
 	
 	/**
@@ -199,7 +198,7 @@ public class Controller implements ActionListener{
 						f.p3.getTage().setText("");
 						f.p3.getTid().setText("");
 						f.p3.getTpost().setText("");
-					}	
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Invalid characters \n"
 							+ "No special characteres");
